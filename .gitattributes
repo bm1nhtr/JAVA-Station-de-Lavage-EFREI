@@ -1,0 +1,13 @@
+# Đảm bảo line endings nhất quán giữa Windows và các OS khác
+* text=auto
+
+# Java source files
+*.java text eol=lf
+
+# NetBeans project files
+*.xml text eol=lf
+*.properties text eol=lf
+
+# Build files
+*.class binary
+*.jar binary

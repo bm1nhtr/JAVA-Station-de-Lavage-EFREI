@@ -1,17 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.mycompany.stationlavage;
+// Binh Minh TRAN - Marouane NOUARA
+// ING1 - APP - BDML 
 
-/**
- *
- * @author nouar
- */
+package model;
+
 public class Client {
 
     // Attributs
-    
     private int numeroClient;
     private String nom;
     private String telephone;
@@ -54,7 +48,6 @@ public class Client {
 
     
     // Méthode toString pour afficher les donner du client quand on fait println 
-   
     @Override
     public String toString() {
         if (email != null) {

@@ -1,19 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
+// Binh Minh TRAN - Marouane NOUARA
+// ING1 - APP - BDML 
+package main;
 
-package com.mycompany.stationlavage;
+import model.Prestation.PrestationTresSale;
+import model.Prestation.PrestationSale;
+import model.Prestation.PrestationExpress;
+import model.Prestation.Prestation;
+import model.Client;
+import model.RendezVous;
 
-import com.mycompany.stationlavage.Prestation.PrestationTresSale;
-import com.mycompany.stationlavage.Prestation.PrestationSale;
-import com.mycompany.stationlavage.Prestation.PrestationExpress;
-import com.mycompany.stationlavage.Prestation.Prestation;
-
-/**
- *
- * @author nouar
- */
-public class Stationlavage {
+public class StationLavageMain {
 
     public static void main(String[] args) {
 
