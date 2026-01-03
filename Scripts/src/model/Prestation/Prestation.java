@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.mycompany.stationlavage.Prestation;
+// Binh Minh TRAN - Marouane NOUARA
+// ING1 - APP - BDML 
 
-/**
- *
- * @author nouar
- */
+package model.Prestation;
 
 
 public abstract class Prestation {
