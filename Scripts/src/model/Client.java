@@ -45,9 +45,40 @@ public class Client {
     public String getEmail() {
         return email;
     }
-
     
-    // Méthode toString pour afficher les donner du client quand on fait println 
+    // À FAIRE : ADD SETTERS
+    
+    /**
+     * Compare deux clients pour déterminer l'ordre lexicographique.
+     * 
+     * Cette méthode retourne true si le client correspondant à l'objet appelant
+     * doit être placé après l'autre client dans le tableau des clients,
+     * false sinon.
+     * 
+     * La comparaison se fait d'abord sur le nom (ordre lexicographique),
+     * puis sur le numéro de téléphone si les noms sont identiques.
+     * 
+     * @param autre l'autre client à comparer
+     * @return true si ce client doit être placé après l'autre, false sinon
+     */
+    public boolean placerApres(Client autre) {
+        // Comparaison lexicographique des noms
+        int comparaisonNom = this.nom.compareToIgnoreCase(autre.nom);
+        
+        if (comparaisonNom > 0) {
+            // Le nom de ce client est après celui de l'autre
+            return true;
+        } else if (comparaisonNom < 0) {
+            // Le nom de ce client est avant celui de l'autre
+            return false;
+        } else {
+            // Les noms sont identiques, on compare les numéros de téléphone
+            return this.telephone.compareTo(autre.telephone) > 0;
+        }
+    }
+    
+    // Méthode toString pour afficher les donner du client quand on fait println
+    // À FAIRE : RECONSIDERER LE MESSAGE TOSTRING()
     @Override
     public String toString() {
         if (email != null) {

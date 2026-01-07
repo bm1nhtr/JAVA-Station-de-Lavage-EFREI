@@ -86,6 +86,7 @@ public class PrestationTresSale extends PrestationSale {
     * @return une description textuelle de la prestation pour véhicule très sale
     */
     @Override
+    // À FAIRE : RECONSIDERER LE MESSAGE TOSTRING()
     public String toString() {
         return "Prestation Tres Sale [categorie Vehicule ="  + categorieVehicule +
             ", type de salissure = " + libelleTypeSalissure() + ", prix = "+ nettoyage() + " euro]";
