@@ -59,7 +59,18 @@ public class RendezVous {
         return prix;
     }
     
-    // À FAIRE : ADD SETTERS
+        // Setters
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public void setPrestation(Prestation prestation) {
+        this.prestation = prestation;
+        this.prix = prestation.nettoyage(); // recalcul automatique du prix
+    }
+
+    //on a choisie de ne pas mettre de setters pour le prix car le prix est un calcule il n'a pas a etres modifier manuellement 
+    //mais on peut changer de prestationt ou de client si on ce trompe 
 
     /**
      * Retourne une représentation textuelle du rendez-vous.
