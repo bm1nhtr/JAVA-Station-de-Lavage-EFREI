@@ -58,6 +58,8 @@ public class RendezVous {
     public double getPrix() {
         return prix;
     }
+    
+    // À FAIRE : ADD SETTERS
 
     /**
      * Retourne une représentation textuelle du rendez-vous.

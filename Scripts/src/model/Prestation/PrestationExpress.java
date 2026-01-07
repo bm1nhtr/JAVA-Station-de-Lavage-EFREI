@@ -54,6 +54,7 @@ public class PrestationExpress extends Prestation {
     * @return une description textuelle de la prestation express
     */
     @Override
+    // À FAIRE : RECONSIDERER LE MESSAGE TOSTRING()
     public String toString() {
         
         String interieur;
