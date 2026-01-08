@@ -12,7 +12,9 @@
 
 ```
 Scripts/
-├── src/
+├── src/ 
+|   ├── service/ (package: service)
+|       └── Etablissment.java
 │   ├── main/
 │   │   └── StationLavageMain.java (package: main)
 │   └── model/
