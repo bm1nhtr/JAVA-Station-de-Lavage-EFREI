@@ -1,0 +1,33 @@
+# NetBeans build files
+**/build/
+**/dist/
+**/nbproject/private/
+**/nbproject/build-impl.xml
+**/nbproject/genfiles.properties
+
+# Maven 
+**/target/
+**/pom.xml.bak
+**/.mvn/
+
+
+# Compiled class files
+**/*.class
+
+# IDE files
+**/.idea/
+**/*.iml
+**/.vscode/
+**/.settings/
+**/.classpath
+**/.project
+**/.factorypath
+
+# OS files
+**/.DS_Store
+**/Thumbs.db
+**/*~
+
+# Log files
+**/*.log
+
