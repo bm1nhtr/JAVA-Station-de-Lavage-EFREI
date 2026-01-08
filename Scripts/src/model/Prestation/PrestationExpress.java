@@ -54,15 +54,15 @@ public class PrestationExpress extends Prestation {
     * @return une description textuelle de la prestation express
     */
     @Override
-    // À FAIRE : RECONSIDERER LE MESSAGE TOSTRING()
+    
     public String toString() {
         
         String interieur;
-        if(nettoyageInterieur) {interieur=" Oui";}
-        else{interieur=" Non";}
+        if(nettoyageInterieur) {interieur=" Nettoyage interieure";}
+        else{interieur=" Pas de nettoyage interieure";}
         
-        return "Prestation Express [categorie Vehicule = " + categorieVehicule +
-            ", nettoyageInterieur =" + interieur + ", prix = " + nettoyage() + " euro]";
+        return "Prestation Express : categorie Vehicule = " + categorieVehicule + ", "+
+                interieur + ", prix = " + nettoyage() + " euro";
     }
 
 }
