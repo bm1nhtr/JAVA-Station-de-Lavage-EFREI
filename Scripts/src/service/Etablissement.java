@@ -5,11 +5,16 @@ package service;
 
 import model.Client;
 import model.RendezVous;
+import model.Prestation.PrestationTresSale;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
 
 public class Etablissement {
     // Attributs
@@ -437,7 +442,7 @@ public class Etablissement {
         }
         
         // Créer la prestation et le rendez-vous
-        model.Prestation.PrestationTresSale prestation = 
+        PrestationTresSale prestation = 
             new model.Prestation.PrestationTresSale(categorieVehicule, typeSalissure);
         RendezVous rdv = new RendezVous(client, prestation);
         
@@ -467,6 +472,96 @@ public class Etablissement {
             }
         }
         return sb.toString();
+    }
+    
+    /**
+     * Sauvegarde les clients de l'établissement dans un fichier texte.
+     * Chaque client est écrit sur une ligne au format défini par versFichier().
+     * 
+     * @param nomFichier le nom du fichier dans lequel sauvegarder
+     * @throws IOException en cas d'erreur d'écriture
+     */
+    public void versFichierClients(String nomFichier) throws IOException {
+        FileWriter fichier = new FileWriter(nomFichier, false); // false = écraser le fichier
+        try {
+            for (int i = 0; i < nombre_clients; i++) {
+                if (liste_clients[i] != null) {
+                    fichier.write(liste_clients[i].versFichier());
+                    fichier.write(System.lineSeparator());
+                }
+            }
+        } finally {
+            fichier.close();
+        }
+    }
+    
+    /**
+     * Charge les clients depuis un fichier texte.
+     * Le fichier doit contenir une ligne par client au format:
+     * "numéro : nom : téléphone" ou "numéro : nom : téléphone : email"
+     * 
+     * IMPORTANT: Cette méthode est une méthode d'instance (non-statique).
+     * Lorsqu'elle est appelée sur un objet Etablissement (ex: E3.depuisFichierClients()),
+     * elle modifie DIRECTEMENT les attributs de cet objet (this.liste_clients, 
+     * this.nombre_clients, this.prochainNumeroClient).
+     * @param nomFichier le nom du fichier à charger
+     * @throws IOException en cas d'erreur de lecture
+     */
+    public void depuisFichierClients(String nomFichier) throws IOException {
+        FileReader fichier = new FileReader(nomFichier);
+        BufferedReader lecteur = new BufferedReader(fichier);
+        try {
+            String ligne;
+            while ((ligne = lecteur.readLine()) != null) {
+                // Ignorer les lignes vides
+                if (ligne.trim().isEmpty()) {
+                    continue;
+                }
+                
+                // Séparer les champs par " : "
+                String[] champs = ligne.split(" : ");
+                
+                if (champs.length >= 3) {
+                    try {
+                        int numero = Integer.parseInt(champs[0].trim());
+                        String nom = champs[1].trim();
+                        String telephone = champs[2].trim();
+                        
+                        if (champs.length == 4) {
+                            // Client avec email
+                            String email = champs[3].trim();
+                            Client client = new Client(numero, nom, telephone, email);
+                            // Utiliser ajouter(Client) pour maintenir l'ordre lexicographique
+                            // NOTE: ajouter() modifie this.liste_clients et this.nombre_clients
+                            // de l'objet Etablissement sur lequel cette méthode est appelée
+                            ajouter(client);
+                            // Mettre à jour prochainNumeroClient si nécessaire
+                            // NOTE: prochainNumeroClient fait référence à this.prochainNumeroClient
+                            // de l'objet qui appelle cette méthode
+                            if (numero >= prochainNumeroClient) {
+                                prochainNumeroClient = numero + 1;
+                            }
+                        } else {
+                            // Client sans email
+                            Client client = new Client(numero, nom, telephone);
+                            // NOTE: ajouter() ajoute le client dans this.liste_clients
+                            // de l'objet Etablissement actuel (celui qui appelle cette méthode)
+                            ajouter(client);
+                            // Mettre à jour prochainNumeroClient si nécessaire
+                            if (numero >= prochainNumeroClient) {
+                                prochainNumeroClient = numero + 1;
+                            }
+                        }
+                    } catch (NumberFormatException e) {
+                        // Ignorer les lignes mal formatées
+                        System.err.println("Ligne ignorée (format invalide): " + ligne);
+                    }
+                }
+            }
+        } finally {
+            lecteur.close();
+            fichier.close();
+        }
     }
 
     

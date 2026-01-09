@@ -43,6 +43,18 @@ public class PrestationSale extends Prestation {
     *
     * @return une description textuelle de la prestation pour véhicule sale
     */
+    /**
+     * Retourne les informations de la prestation sale sous forme de chaîne
+     * de caractères pour l'écriture dans un fichier texte.
+     * Format: "catégorie : prix"
+     * 
+     * @return une chaîne de caractères formatée pour le fichier
+     */
+    @Override
+    public String versFichier() {
+        return categorieVehicule + " : " + (int)nettoyage();
+    }
+    
     @Override
     
     public String toString() {

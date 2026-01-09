@@ -53,6 +53,27 @@ public class PrestationExpress extends Prestation {
     *
     * @return une description textuelle de la prestation express
     */
+    /**
+     * Retourne si le nettoyage intérieur est inclus.
+     * 
+     * @return true si le nettoyage intérieur est inclus, false sinon
+     */
+    public boolean getNettoyageInterieur() {
+        return nettoyageInterieur;
+    }
+    
+    /**
+     * Retourne les informations de la prestation express sous forme de chaîne
+     * de caractères pour l'écriture dans un fichier texte.
+     * Format: "catégorie : true/false : prix"
+     * 
+     * @return une chaîne de caractères formatée pour le fichier
+     */
+    @Override
+    public String versFichier() {
+        return categorieVehicule + " : " + nettoyageInterieur + " : " + (int)nettoyage();
+    }
+    
     @Override
     
     public String toString() {

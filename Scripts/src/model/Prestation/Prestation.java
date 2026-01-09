@@ -121,13 +121,30 @@ public abstract class Prestation {
     
     public abstract double nettoyage();
     
+    /**
+     * Retourne la catégorie du véhicule.
+     * 
+     * @return la catégorie du véhicule ("A", "B" ou "C")
+     */
+    public String getCategorieVehicule() {
+        return categorieVehicule;
+    }
     
     /**
-    * Retourne une représentation textuelle d’une prestation.
+     * Méthode abstraite pour retourner les informations de la prestation
+     * sous forme de chaîne de caractères pour l'écriture dans un fichier texte.
+     * 
+     * @return une chaîne de caractères formatée pour le fichier
+     */
+    public abstract String versFichier();
+    
+    
+    /**
+    * Retourne une représentation textuelle d'une prestation.
     *
-    * Cette méthode permet d’afficher de manière lisible
+    * Cette méthode permet d'afficher de manière lisible
     * la catégorie du véhicule associée à la prestation.
-    * Elle est utilisée automatiquement lorsque l’objet
+    * Elle est utilisée automatiquement lorsque l'objet
     * Prestation est affiché (par exemple avec System.out.println).
     *
     * @return une description textuelle de la prestation

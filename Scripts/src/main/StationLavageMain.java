@@ -155,6 +155,80 @@ public class StationLavageMain {
         
         System.out.println("\n==========================================");
         System.out.println("FIN DES TESTS PARTIE 1");
+        System.out.println("==========================================\n");
+        
+        // =========================
+        // TEST PARTIE 2 - Gestion des fichiers
+        // =========================
+        System.out.println("==========================================");
+        System.out.println("TEST PARTIE 2 - GESTION DES FICHIERS");
+        System.out.println("==========================================\n");
+        
+        // Test versFichier() pour Client
+        System.out.println("--- Test versFichier() - Client ---");
+        System.out.println("c1.versFichier() = " + c1.versFichier());
+        System.out.println("c2.versFichier() = " + c2.versFichier());
+        
+        // Test versFichier() pour Prestations
+        System.out.println("\n--- Test versFichier() - Prestations ---");
+        System.out.println("p1 (Express).versFichier() = " + p1.versFichier());
+        System.out.println("p2 (Sale).versFichier() = " + p2.versFichier());
+        System.out.println("p3 (TresSale).versFichier() = " + p3.versFichier());
+        
+        // Test versFichier() pour RendezVous
+        System.out.println("\n--- Test versFichier() - RendezVous ---");
+        LocalDateTime dateHeure1 = LocalDateTime.of(demain, heure1);
+        LocalDateTime dateHeure2 = LocalDateTime.of(demain, heure2);
+        LocalDateTime dateHeure3 = LocalDateTime.of(demain, heure3);
+        
+        if (rdv1 != null) {
+            System.out.println("rdv1.versFichier():");
+            System.out.println(rdv1.versFichier(dateHeure1));
+        }
+        if (rdv2 != null) {
+            System.out.println("\nrdv2.versFichier():");
+            System.out.println(rdv2.versFichier(dateHeure2));
+        }
+        if (rdv3 != null) {
+            System.out.println("\nrdv3.versFichier():");
+            System.out.println(rdv3.versFichier(dateHeure3));
+        }
+        
+        // Test versFichierClients() et depuisFichierClients()
+        System.out.println("\n--- Test gestion fichiers clients ---");
+        String nomFichierClients = "clients.txt";
+        
+        try {
+            // Sauvegarder les clients
+            System.out.println("Sauvegarde des clients dans " + nomFichierClients + "...");
+            E1.versFichierClients(nomFichierClients);
+            System.out.println("✓ Clients sauvegardés avec succès");
+            
+            // Créer un nouvel établissement et charger les clients
+            System.out.println("\nCréation d'un nouvel établissement et chargement des clients...");
+            Etablissement E3 = new Etablissement("Station Chargée");
+            
+            // EXPLICATION: Pourquoi E3 est modifié après cet appel ?
+            // - depuisFichierClients() est une méthode d'instance (non-statique)
+            // - Quand on appelle E3.depuisFichierClients(), la méthode travaille sur l'objet E3
+            E3.depuisFichierClients(nomFichierClients);
+            System.out.println("✓ Clients chargés avec succès");
+            System.out.println("\nClients chargés depuis le fichier:");
+            System.out.println(E3);
+            
+            // Vérifier que la numérotation continue correctement
+            System.out.println("Test numérotation continue après chargement:");
+            Client nouveau4 = E3.ajouter("Test", "0744444444");
+            System.out.println("Nouveau client ajouté: " + nouveau4);
+            System.out.println("(Le numéro devrait continuer après le dernier client chargé)");
+            
+        } catch (java.io.IOException e) {
+            System.err.println("Erreur lors de la gestion des fichiers: " + e.getMessage());
+            e.printStackTrace();
+        }
+        
+        System.out.println("\n==========================================");
+        System.out.println("FIN DES TESTS PARTIE 2");
         System.out.println("==========================================");
     }
 }

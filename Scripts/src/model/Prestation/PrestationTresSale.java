@@ -91,6 +91,27 @@ public class PrestationTresSale extends PrestationSale {
     }
     
     /**
+     * Retourne le type de salissure.
+     * 
+     * @return le type de salissure (1, 2, 3 ou 4)
+     */
+    public int getTypeSalissure() {
+        return typeSalissure;
+    }
+    
+    /**
+     * Retourne les informations de la prestation très sale sous forme de chaîne
+     * de caractères pour l'écriture dans un fichier texte.
+     * Format: "catégorie : typeSalissure : prix"
+     * 
+     * @return une chaîne de caractères formatée pour le fichier
+     */
+    @Override
+    public String versFichier() {
+        return categorieVehicule + " : " + typeSalissure + " : " + (int)nettoyage();
+    }
+    
+    /**
     * Retourne le libellé correspondant au type de salissure.
     *
     * @return le type de salissure sous forme textuelle

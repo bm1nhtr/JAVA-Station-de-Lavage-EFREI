@@ -106,4 +106,19 @@ public class Client {
             return "Client [numero= " + numeroClient +", nom= " + nom +", telephone= " + telephone + "]";
         }
     }
+    
+    /**
+     * Retourne les informations du client sous forme de chaîne de caractères
+     * pour l'écriture dans un fichier texte.
+     * Format: "numéro : nom : téléphone" ou "numéro : nom : téléphone : email"
+     * 
+     * @return une chaîne de caractères formatée pour le fichier
+     */
+    public String versFichier() {
+        if (email != null && !email.trim().isEmpty()) {
+            return numeroClient + " : " + nom + " : " + telephone + " : " + email;
+        } else {
+            return numeroClient + " : " + nom + " : " + telephone;
+        }
+    }
 }
