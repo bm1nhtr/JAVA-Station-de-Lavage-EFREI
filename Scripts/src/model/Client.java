@@ -46,11 +46,12 @@ public class Client {
         return email;
     }
     
+
     // Setters
     public void setNumeroClient(int numeroClient) {
         this.numeroClient = numeroClient;
     }
-    
+
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -62,7 +63,7 @@ public class Client {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+ 
     /**
      * Compare deux clients pour déterminer l'ordre lexicographique.
      * 

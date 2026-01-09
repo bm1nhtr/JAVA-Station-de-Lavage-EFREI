@@ -59,26 +59,19 @@ public class RendezVous {
         return prix;
     }
     
+
     // Setters
     public void setClient(Client client) {
         this.client = client;
-        // Recalculer le prix si la prestation existe
-        if (this.prestation != null) {
-            this.prix = this.prestation.nettoyage();
-        }
     }
-    
+
     public void setPrestation(Prestation prestation) {
         this.prestation = prestation;
-        // Recalculer automatiquement le prix
-        if (prestation != null) {
-            this.prix = prestation.nettoyage();
-        }
+        this.prix = prestation.nettoyage(); // recalcul automatique du prix
     }
-    
-    public void setPrix(double prix) {
-        this.prix = prix;
-    }
+
+    //on a choisie de ne pas mettre de setters pour le prix car le prix est un calcule il n'a pas a etres modifier manuellement 
+    //mais on peut changer de prestationt ou de client si on ce trompe 
 
     /**
      * Retourne une représentation textuelle du rendez-vous.
