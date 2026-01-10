@@ -3,8 +3,6 @@
 
 package model.Prestation;
 
-import model.Prestation.Prestation;
-
 public class PrestationSale extends Prestation {
        
     //Constructeur

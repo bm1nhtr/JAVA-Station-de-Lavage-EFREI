@@ -33,8 +33,8 @@ public class StationLavageMain {
         Client c2 = new Client(2, "Martin", "0698765432", "martin@mail.com");
 
         // Affichage des informations des clients
-        System.out.println("Client 1: " + c1);
-        System.out.println("Client 2: " + c2);
+        System.out.println(c1);
+        System.out.println(c2);
         
         // Test de la méthode placerApres()
         System.out.println("\nTest placerApres():");

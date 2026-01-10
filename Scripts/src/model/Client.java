@@ -100,12 +100,15 @@ public class Client {
      */
     @Override
     public String toString() {
-        if (email != null) {
-            return "Client [numero= " + numeroClient +", nom= " + nom +", telephone= " + telephone +", email= " + email + "]";
-        } else {
-            return "Client [numero= " + numeroClient +", nom= " + nom +", telephone= " + telephone + "]";
+        String msg = "Client numéro " + numeroClient
+                   + ", nom " + nom
+                   + ", téléphone " + telephone;
+        if (email != null && !email.isEmpty()) {
+            msg += ", email " + email;
         }
+        return msg;
     }
+
     
     /**
      * Retourne les informations du client sous forme de chaîne de caractères

@@ -108,7 +108,8 @@ public class RendezVous {
      */
     @Override
     public String toString() {
-        return "RendezVous : " + client + ", " + prestation ;
+        return "\n- " + client + "\n- " + prestation;
     }
+
 }
 
