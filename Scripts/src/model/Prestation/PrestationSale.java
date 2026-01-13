@@ -48,6 +48,13 @@ public class PrestationSale extends Prestation {
     public String toString() {
         return "Prestation Sale : categorie Vehicule = " + categorieVehicule +", prix = "+ nettoyage() + " euro";
     }
+    
+    @Override
+    public String versFichier() {
+        return categorieVehicule 
+                + " : " + nettoyage();
+    }
+
 
     
 }

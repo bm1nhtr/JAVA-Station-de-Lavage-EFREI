@@ -105,4 +105,12 @@ public class Client {
             return "Client [numero= " + numeroClient +", nom= " + nom +", telephone= " + telephone + "]";
         }
     }
+    
+    public String versFichier() {
+        if (email == null || email.isBlank()) {
+            return numeroClient + " : " + nom + " : " + telephone;
+        }
+        return numeroClient + " : " + nom + " : " + telephone + " : " + email;
+    }
+
 }

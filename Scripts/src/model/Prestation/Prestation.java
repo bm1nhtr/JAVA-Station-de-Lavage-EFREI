@@ -136,5 +136,9 @@ public abstract class Prestation {
     public String toString() {
         return " [categorieVehicule=" + categorieVehicule + "]";
     }
+    
+    
+    public abstract String versFichier();
+
 }
 

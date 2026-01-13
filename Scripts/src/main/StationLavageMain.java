@@ -12,6 +12,7 @@ import service.Etablissement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 public class StationLavageMain {
 
@@ -85,6 +86,8 @@ public class StationLavageMain {
         RendezVous rv2 = new RendezVous(c2, p2);
         RendezVous rv3 = new RendezVous(c1, p3);
 
+
+
         // Affichage des informations des rendez-vous
         System.out.println("Rendez-vous 1: " + rv1);
         System.out.println("Rendez-vous 2: " + rv2);
@@ -156,5 +159,39 @@ public class StationLavageMain {
         System.out.println("\n==========================================");
         System.out.println("FIN DES TESTS PARTIE 1");
         System.out.println("==========================================");
+        
+        System.out.println("\n--- TEST METHODE PLANIFIER() ---");
+        E1.planifier();
+        
+        System.out.println("\n--- TEST METHODE AFFICHER ---");
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Entrez une date dans les 7 jours suivants la date d'aujourd'hui (format YYYY-MM-DD) : ");
+        String saisie = sc.nextLine();
+        LocalDate date = LocalDate.parse(saisie);
+
+        int indice = E1.obtenirIndiceJour(date);
+
+        if (indice == -1) {
+            System.out.println(" La date ne correspond à aucun jour du planning !");
+        } else {
+            System.out.println(" Date présente dans le planning (jour index = " + indice + ")");
+            E1.afficher(date); // affiche ce jour-là
+        }
+        
+        E1.afficherClientDepuisConsole();
+        System.out.println("\n--- TEST AFFICHER RDV PAR NUMÉRO CLIENT ---");
+        E1.afficherRendezVousParNumeroClient();
+        
+        E1.versFichierClients("clients.txt");
+
+        E1.depuisFichierClients("clients.txt");
+        E1.afficher("Dupont", "");   // vérifier que ça marche !
+
+
+
+
+
+
     }
 }
