@@ -3,21 +3,21 @@
 
 package model;
 
-
-import java.time.LocalDateTime;
 import model.Prestation.Prestation;
+import java.time.LocalDateTime;
+
+
 
 /**
- * Représente un rendez-vous dans la station de lavage.
+ * Représente un rendez-vous dans la station de nettoyage.
  *
  * Un rendez-vous associe :
  *  - un client
  *  - une prestation choisie
- *  - la date et l'heure du rendez-vous
- *  - le prix calculé automatiquement selon la prestation
+ *  - le prix correspondant à cette prestation
  *
- * La classe permet également de convertir un rendez-vous
- * dans un format texte afin d’être sauvegardé dans un fichier.
+ * Le prix n’est pas saisi manuellement : il est calculé
+ * automatiquement à partir de la prestation.
  */
 public class RendezVous {
 
@@ -27,22 +27,17 @@ public class RendezVous {
     // Prestation choisie par le client
     private Prestation prestation;
 
-    // Prix total calculé automatiquement (selon la prestation)
+    // Prix de la prestation
     private double prix;
 
-    // Date et heure du rendez-vous
-    // Permet la sauvegarde au format YYYY-MM-DDTHH:MM
-    private LocalDateTime dateHeure;
-
     /**
-     * Constructeur d’un rendez-vous.
+     * Constructeur de la classe RendezVous.
+     * Il initialise le client et la prestation,
+     * puis calcule automatiquement le prix
+     * de la prestation choisie.
      *
-     * @param client       le client concerné
-     * @param prestation   la prestation choisie par le client
-     * @param dateHeure    la date et l’heure prévues du rendez-vous
-     *
-     * Le prix est calculé automatiquement via la méthode nettoyage()
-     * de la prestation.
+     * @param client le client concerné par le rendez-vous
+     * @param prestation la prestation choisie
      */
     public RendezVous(Client client, Prestation prestation) {
         this.client = client;
@@ -50,10 +45,8 @@ public class RendezVous {
         this.prix = prestation.nettoyage();
     }
 
-
-    // =======================
-    //        GETTERS
-    // =======================
+  
+    // Getters
 
     public Client getClient() {
         return client;
@@ -66,71 +59,56 @@ public class RendezVous {
     public double getPrix() {
         return prix;
     }
+    
 
-    public LocalDateTime getDateHeure() {
-        return dateHeure;
-    }
-
-    // =======================
-    //        SETTERS
-    // =======================
-
-    /**
-     * Modifie le client du rendez-vous.
-     * (Peut être utile si une erreur a été commise lors de la saisie.)
-     */
+    // Setters
     public void setClient(Client client) {
         this.client = client;
     }
 
-    /**
-     * Modifie la prestation du rendez-vous.
-     * Le prix est recalculé automatiquement.
-     */
     public void setPrestation(Prestation prestation) {
         this.prestation = prestation;
-        this.prix = prestation.nettoyage(); // recalcul automatique
+        this.prix = prestation.nettoyage(); // recalcul automatique du prix
     }
 
+    //on a choisie de ne pas mettre de setters pour le prix car le prix est un calcule il n'a pas a etres modifier manuellement 
+    //mais on peut changer de prestationt ou de client si on ce trompe 
+
     /**
-     * Modifie la date et l'heure du rendez-vous.
+     * Retourne les informations du rendez-vous sous forme de chaîne de caractères
+     * pour l'écriture dans un fichier texte.
+     * Format: 3 lignes séparées par System.lineSeparator():
+     * - Ligne 1: date et heure (format: yyyy-MM-ddThh:mm)
+     * - Ligne 2: numéro du client
+     * - Ligne 3: informations de la prestation (format dépend du type)
+     * 
+     * Note: Cette méthode nécessite que le rendez-vous ait une date/heure.
+     * Pour l'instant, elle retourne uniquement les informations disponibles.
+     * 
+     * @param dateHeure la date et l'heure du rendez-vous
+     * @return une chaîne de caractères formatée pour le fichier (3 lignes)
      */
-    public void setDateHeure(LocalDateTime dateHeure) {
-        this.dateHeure = dateHeure;
+    public String versFichier(LocalDateTime dateHeure) {
+        StringBuilder sb = new StringBuilder();
+        // Ligne 1: date et heure
+        sb.append(dateHeure.toString().substring(0, 16)); // Format: yyyy-MM-ddThh:mm
+        sb.append(System.lineSeparator());
+        // Ligne 2: numéro du client
+        sb.append(client.getNumeroClient());
+        sb.append(System.lineSeparator());
+        // Ligne 3: informations de la prestation
+        sb.append(prestation.versFichier());
+        return sb.toString();
     }
 
-    // =======================
-    //     SAUVEGARDE FICHIER
-    // =======================
-
     /**
-     * Retourne une représentation textuelle du rendez-vous
-     * au format imposé pour la sauvegarde dans le fichier :
+     * Retourne une représentation textuelle du rendez-vous.
      *
-     *  Ligne 1 : date et heure (YYYY-MM-DDTHH:MM)
-     *  Ligne 2 : numéro du client
-     *  Ligne 3 : prestation sous forme "categorie : info : prix"
-     *
-     * @return une chaîne de caractères prête à être écrite dans le fichier
-     */
-    public String versFichier() {
-        return dateHeure.toString() + "\n"
-             + client.getNumeroClient() + "\n"
-             + prestation.versFichier();
-    }
-
-    // =======================
-    //       TO STRING
-    // =======================
-
-    /**
-     * Retourne une description complète du rendez-vous,
-     * affichée lors des tests ou dans le planning.
+     * @return une description du rendez-vous
      */
     @Override
     public String toString() {
-        return "RendezVous : " + dateHeure
-                + ", " + client
-                + ", " + prestation;
+        return "\n- " + client + "\n- " + prestation;
     }
+
 }
