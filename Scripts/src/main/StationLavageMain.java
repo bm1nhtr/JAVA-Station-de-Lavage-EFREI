@@ -164,28 +164,16 @@ public class StationLavageMain {
     System.out.println("==========================================");
     System.out.println("TEST PARTIE 2 - GESTION DES FICHIERS");
     System.out.println("==========================================\n");
-    
-// À FAIRE : reconsidérer cette méthode. car en saisissant 5 pour le type de
-// prestation, le programme continue pendant qu'il y en a 3. Il faut que tu testes 
-// ton programme puis ajouter des try catch pour que l'utilisateur puisse re saisir.
+   
     
     //TEST METHODE PLANIFIER()
     System.out.println("\n--- TEST METHODE PLANIFIER() ---");
     E1.planifier();
-    
- // À FAIRE : reconsidérer cette méthode. Lors de la saisie "2022-2-3", cela ne fonctionne pas.
- // Il faut ajouter un try/catch et afficher un message indiquant que la saisie est invalide
- // (deux valeurs numériques attendues pour le mois, jour).
+
 
     //TEST METHODE AFFICHER PLANNING 
     System.out.println("\n--- TEST METHODE AFFICHER PLANNING ---");
     E1.afficherPlanning();
-    
-// À FAIRE : reconsidérer cette méthode, car en saisissant "Martin" et son numéro
-// Client c2 = new Client(2, "Martin", "0698765432", "martin@mail.com");
-// aucun client n’est détecté. Identifier l’erreur et corriger le code si l'erreur
-// vient du code et non pas utilisateur !!!!!
-// Ne pas oublier de mentionner cette erreur dans le rapport et la solution apportée.
 
 
     
@@ -193,11 +181,7 @@ public class StationLavageMain {
     System.out.println("\n--- TEST METHODE AFFICHER CLIENT ---");
     E1.afficherClient();
 
-// À FAIRE : reconsidérer cette méthode, car en saisissant le numéro de Martin
-// Client c2 = new Client(2, "Martin", "0698765432", "martin@mail.com");
-// aucun client n’est détecté. Identifier l’erreur et corriger le code si l'erreur
-// vient du code et non pas utilisateur !!!!!
-// Ne pas oublier de mentionner cette erreur dans le rapport et la solution apportée.
+
     
     //TEST AFFICHER RDV PAR NUMÉRO CLIENT
     System.out.println("\n--- TEST AFFICHER RDV PAR NUMÉRO CLIENT ---");
