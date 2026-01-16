@@ -125,5 +125,13 @@ public class PrestationTresSale extends PrestationSale {
             default -> "salissure inconnue";
         };
     }
+    
+//    @Override
+//    public String versFichier() {
+//        return categorieVehicule 
+//                + " : " + typeSalissure 
+//                + " : " + nettoyage();
+//    }
+
 
 }

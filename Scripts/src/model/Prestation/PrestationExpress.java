@@ -83,6 +83,15 @@ public class PrestationExpress extends Prestation {
         return "Prestation Express : categorie Vehicule = " + categorieVehicule + ", "+
                 interieur + ", prix = " + nettoyage() + " euro";
     }
+    
+//    @Override
+//    public String versFichier() {
+//        return categorieVehicule 
+//                + " : " + nettoyageInterieur 
+//                + " : " + nettoyage();
+//    }
+
+
 
 }
 

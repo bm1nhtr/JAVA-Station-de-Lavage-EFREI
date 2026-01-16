@@ -71,9 +71,6 @@ public class RendezVous {
         this.prix = prestation.nettoyage(); // recalcul automatique du prix
     }
 
-    //on a choisie de ne pas mettre de setters pour le prix car le prix est un calcule il n'a pas a etres modifier manuellement 
-    //mais on peut changer de prestationt ou de client si on ce trompe 
-
     /**
      * Retourne les informations du rendez-vous sous forme de chaîne de caractères
      * pour l'écriture dans un fichier texte.
@@ -112,4 +109,3 @@ public class RendezVous {
     }
 
 }
-
