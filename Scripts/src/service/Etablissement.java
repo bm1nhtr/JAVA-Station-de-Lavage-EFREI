@@ -131,10 +131,15 @@ public class Etablissement {
         }
         
         // Trouver la position d'insertion pour maintenir l'ordre lexicographique
+	     // Boucle pour trouver la position d'insertion
+	     // La boucle continue tant que :
+	     // 1️ on n'a pas dépassé le nombre actuel de clients
+	     // 2️ la case courante du tableau contient déjà un client
+	     // 3️ le client à insérer doit être placé après le client courant
         int position = 0;
         while (position < nombre_clients && 
                liste_clients[position] != null &&
-               !client.placerApres(liste_clients[position])) {
+               client.placerApres(liste_clients[position])) {
             position++;
         }
         

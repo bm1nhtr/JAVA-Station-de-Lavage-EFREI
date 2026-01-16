@@ -146,7 +146,6 @@ public class StationLavageMain {
     System.out.println(creneau1);
     System.out.println(creneau2);
         
-    // il manque 18h ? car de 10 - 18h exlus
     
     // Test avec établissement initialisé avec clients
     System.out.println("\n--- Test établissement avec clients initiaux ---");
