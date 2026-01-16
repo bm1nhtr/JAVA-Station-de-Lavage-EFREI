@@ -87,12 +87,11 @@ public class StationLavageMain {
 
         // Affichage des informations des rendez-vous
         System.out.println("Rendez-vous 1: " + rv1);
-        System.out.println("Rendez-vous 2: " + rv2);
-        System.out.println("Rendez-vous 3: " + rv3);
         System.out.println("Prix rv1: " + rv1.getPrix() + " €");
+        System.out.println("Rendez-vous 2: " + rv2);
         System.out.println("Prix rv2: " + rv2.getPrix() + " €");
+        System.out.println("Rendez-vous 3: " + rv3);
         System.out.println("Prix rv3: " + rv3.getPrix() + " €");
-        
         
         // =========================
         // Test de l'etablissement
@@ -145,6 +144,8 @@ public class StationLavageMain {
 
         System.out.println(creneau1);
         System.out.println(creneau2);
+        
+        // il manque 18h ?
 
         
         // Test avec établissement initialisé avec clients
