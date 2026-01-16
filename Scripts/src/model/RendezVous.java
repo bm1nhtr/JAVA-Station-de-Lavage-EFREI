@@ -4,6 +4,7 @@
 package model;
 
 import model.Prestation.Prestation;
+import java.time.LocalDateTime;
 
 
 
@@ -59,7 +60,8 @@ public class RendezVous {
         return prix;
     }
     
-        // Setters
+
+    // Setters
     public void setClient(Client client) {
         this.client = client;
     }
@@ -73,13 +75,40 @@ public class RendezVous {
     //mais on peut changer de prestationt ou de client si on ce trompe 
 
     /**
+     * Retourne les informations du rendez-vous sous forme de chaîne de caractères
+     * pour l'écriture dans un fichier texte.
+     * Format: 3 lignes séparées par System.lineSeparator():
+     * - Ligne 1: date et heure (format: yyyy-MM-ddThh:mm)
+     * - Ligne 2: numéro du client
+     * - Ligne 3: informations de la prestation (format dépend du type)
+     * 
+     * Note: Cette méthode nécessite que le rendez-vous ait une date/heure.
+     * Pour l'instant, elle retourne uniquement les informations disponibles.
+     * 
+     * @param dateHeure la date et l'heure du rendez-vous
+     * @return une chaîne de caractères formatée pour le fichier (3 lignes)
+     */
+    public String versFichier(LocalDateTime dateHeure) {
+        StringBuilder sb = new StringBuilder();
+        // Ligne 1: date et heure
+        sb.append(dateHeure.toString().substring(0, 16)); // Format: yyyy-MM-ddThh:mm
+        sb.append(System.lineSeparator());
+        // Ligne 2: numéro du client
+        sb.append(client.getNumeroClient());
+        sb.append(System.lineSeparator());
+        // Ligne 3: informations de la prestation
+        sb.append(prestation.versFichier());
+        return sb.toString();
+    }
+
+    /**
      * Retourne une représentation textuelle du rendez-vous.
      *
      * @return une description du rendez-vous
      */
     @Override
     public String toString() {
-        return "RendezVous : " + client + ", " + prestation ;
+        return "\n- " + client + "\n- " + prestation;
     }
-}
 
+}
