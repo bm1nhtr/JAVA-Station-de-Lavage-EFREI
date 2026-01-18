@@ -6,8 +6,6 @@ package model;
 import model.Prestation.Prestation;
 import java.time.LocalDateTime;
 
-
-
 /**
  * Représente un rendez-vous dans la station de nettoyage.
  *
@@ -45,9 +43,7 @@ public class RendezVous {
         this.prix = prestation.nettoyage();
     }
 
-  
     // Getters
-
     public Client getClient() {
         return client;
     }
@@ -59,7 +55,6 @@ public class RendezVous {
     public double getPrix() {
         return prix;
     }
-    
 
     // Setters
     public void setClient(Client client) {

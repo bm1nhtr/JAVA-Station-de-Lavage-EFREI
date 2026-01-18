@@ -17,8 +17,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
-
-
 public class Etablissement {
     // Attributs
     private String nom;
@@ -131,11 +129,11 @@ public class Etablissement {
         }
         
         // Trouver la position d'insertion pour maintenir l'ordre lexicographique
-	     // Boucle pour trouver la position d'insertion
-	     // La boucle continue tant que :
-	     // 1️ on n'a pas dépassé le nombre actuel de clients
-	     // 2️ la case courante du tableau contient déjà un client
-	     // 3️ le client à insérer doit être placé après le client courant
+        // Boucle pour trouver la position d'insertion
+        // La boucle continue tant que :
+        // 1️ on n'a pas dépassé le nombre actuel de clients
+        // 2️ la case courante du tableau contient déjà un client
+        // 3️ le client à insérer doit être placé après le client courant
         int position = 0;
         while (position < nombre_clients && 
                liste_clients[position] != null &&
@@ -259,13 +257,26 @@ public class Etablissement {
         // Note: On ne ferme pas le Scanner(System.in) car cela fermerait System.in
         // et empêcherait les utilisations ultérieures
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Choisissez un créneau (1-" + nbDisponibles + ") : ");
-        int choix = scanner.nextInt();
+        int choix = 0;
+        boolean choixValide = false;
         
-        // Vérifier que le choix est valide (entre 1 et le nombre de créneaux disponibles)
-        if (choix < 1 || choix > nbDisponibles) {
-            System.out.println("Choix invalide.");
-            return null;
+        // Boucle pour demander un choix valide jusqu'à ce que l'utilisateur entre une valeur correcte
+        while (!choixValide) {
+            try {
+                System.out.print("Choisissez un créneau (1-" + nbDisponibles + ") : ");
+                choix = scanner.nextInt();
+                
+                // Vérifier que le choix est valide (entre 1 et le nombre de créneaux disponibles)
+                if (choix < 1 || choix > nbDisponibles) {
+                    System.out.println("Choix invalide. Veuillez entrer un nombre entre 1 et " + nbDisponibles + ".");
+                    scanner.nextLine(); // Consommer la ligne restante
+                } else {
+                    choixValide = true;
+                }
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Erreur : Veuillez entrer un nombre valide.");
+                scanner.nextLine(); // Consommer/Supprimer l'entrée invalide pour éviter une boucle infinie
+            }
         }
         
         // Retourner le créneau choisi sous forme de LocalDateTime
@@ -328,14 +339,27 @@ public class Etablissement {
         // Note: On ne ferme pas le Scanner(System.in) car cela fermerait System.in
         // et empêcherait les utilisations ultérieures
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Choisissez un jour (1-" + nbDisponibles + ") : ");
-        int choix = scanner.nextInt();
+        int choix = 0;
+        boolean choixValide = false;
         
-        if (choix < 1 || choix > nbDisponibles) {
-            System.out.println("Choix invalide.");
-            return null;
+        // Boucle pour demander un choix valide jusqu'à ce que l'utilisateur entre une valeur correcte
+        while (!choixValide) {
+            try {
+                System.out.print("Choisissez un jour (1-" + nbDisponibles + ") : ");
+                choix = scanner.nextInt();
+                
+                // Vérifier que le choix est valide (entre 1 et le nombre de jours disponibles)
+                if (choix < 1 || choix > nbDisponibles) {
+                    System.out.println("Choix invalide. Veuillez entrer un nombre entre 1 et " + nbDisponibles + ".");
+                    scanner.nextLine(); // Consommer la ligne restante
+                } else {
+                    choixValide = true;
+                }
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Erreur : Veuillez entrer un nombre valide.");
+                scanner.nextLine(); // Consommer/Supprimer l'entrée invalide pour éviter une boucle infinie
+            }
         }
-        
         // Retourner le créneau choisi
         LocalDate jourChoisi = joursDisponibles[choix - 1];
         return LocalDateTime.of(jourChoisi, heure);
@@ -370,7 +394,6 @@ public class Etablissement {
         if (indiceCreneau < 0 || indiceCreneau >= NB_CRENEAUX) {
             return null;
         }
-        
         return new int[]{indiceCreneau, (int)joursEcoules};
     }
     
@@ -406,7 +429,6 @@ public class Etablissement {
         
         // Ajouter le rendez-vous au planning
         planning[creneau][jour] = rdv;
-        
         return rdv;
     }
     
@@ -441,7 +463,6 @@ public class Etablissement {
         
         // Ajouter le rendez-vous au planning
         planning[creneau][jour] = rdv;
-        
         return rdv;
     }
     
@@ -477,7 +498,6 @@ public class Etablissement {
         
         // Ajouter le rendez-vous au planning
         planning[creneau][jour] = rdv;
-        
         return rdv;
     }
 
@@ -607,16 +627,11 @@ public class Etablissement {
      * La méthode inclut des protections avec try/catch pour éviter les saisies invalides.
      */
     public void planifier() {
-
-        
         Scanner sc = new Scanner(System.in);
 
         System.out.println("\n===== PLANIFIER UN RENDEZ-VOUS =====");
 
-        
         // 1) IDENTIFICATION DU CLIENT
-        
-
         System.out.print("Nom du client : ");
         String nom = sc.nextLine();
 
@@ -639,10 +654,7 @@ public class Etablissement {
             System.out.println("Client trouvé : " + client);
         }
 
-       
         // 2) CHOIX DU JOUR (1 à 7)
-        
-
         LocalDate today = LocalDate.now();
         LocalDate[] jours = new LocalDate[NB_JOURS];
 
@@ -670,13 +682,9 @@ public class Etablissement {
                 sc.nextLine(); // vide le buffer
             }
         }
-
         LocalDate jourChoisi = jours[choixJour - 1];
 
-        
         // 3) CRÉNEAU DISPONIBLE
-        
-
         LocalDateTime dateHeure = rechercher(jourChoisi);
 
         if (dateHeure == null) {
@@ -687,10 +695,7 @@ public class Etablissement {
         LocalDate date = dateHeure.toLocalDate();
         LocalTime heure = dateHeure.toLocalTime();
 
-        
         // 4) CHOIX DU TYPE DE PRESTATION
-        
-
         System.out.println("""
             Type de prestation :
             1 - Prestation Express
@@ -716,8 +721,6 @@ public class Etablissement {
             }
         }
 
-        //sc.nextLine();
-
         // Saisie de la catégorie du véhicule
         String categorie = "";
 
@@ -732,15 +735,10 @@ public class Etablissement {
             System.out.println(" Catégorie invalide. Veuillez saisir A, B ou C.\n");
         }
 
-
         RendezVous rdv = null;
 
-       
         // 5) CRÉATION DU RENDEZ-VOUS SELON LE TYPE DE PRESTATION
-        
-
         switch (choixPrestation) {
-
             //  PRESTATION EXPRESS
             case 1 -> {
                 System.out.print("Nettoyage intérieur (true/false) : ");
@@ -756,7 +754,6 @@ public class Etablissement {
                         sc.nextLine();
                     }
                 }
-
                 rdv = ajouter(client, date, heure, categorie, interieur);
             }
 
@@ -792,15 +789,11 @@ public class Etablissement {
                         sc.nextLine();
                     }
                 }
-
                 rdv = ajouter(client, date, heure, categorie, typeSalissure);
             }
         }
 
-        
         // 6) AFFICHAGE FINAL
-        
-
         if (rdv == null) {
             System.out.println(" Le créneau était déjà occupé. Rendez-vous non enregistré.");
         } else {
@@ -809,9 +802,6 @@ public class Etablissement {
             System.out.println("Prix total : " + rdv.getPrix() + " €");
         }
     }
-
-
-   
 
      /**
     * Méthode afficherClient()
@@ -827,9 +817,7 @@ public class Etablissement {
     * Valeur retournée :
     *     Aucune (type void). La méthode effectue uniquement un affichage.
      */
-
     public void afficherClient() {
-
         Scanner sc = new Scanner(System.in);
 
         System.out.println("\n=== Recherche de client ===");
@@ -890,15 +878,11 @@ public class Etablissement {
                 }
             }
         }
-
         if (!trouve) {
             System.out.println("Aucun client ne correspond à la recherche.");
         }
     }
 
-    
-    
-    
     /**
     * Affiche le planning complet d'un jour donné.
     * L'utilisateur saisit une date au format YYYY-MM-DD.
@@ -906,20 +890,13 @@ public class Etablissement {
     * puis affiche tous les créneaux du jour, avec rendez-vous ou [Libre].
     */
    public void afficherPlanning() {
-
-       
        Scanner sc = new Scanner(System.in);
-
        LocalDate date = null;      // La date saisie par l'utilisateur
        int index = -1;             // Index du jour dans le planning
        LocalDate today = LocalDate.now();
 
-       
        // 1) DEMANDE ET VALIDATION DE LA DATE
-       
-
        while (index == -1) {
-
            System.out.print("Entrez une date (YYYY-MM-DD) : ");
            String saisie = sc.nextLine();
 
@@ -942,10 +919,7 @@ public class Etablissement {
            }
        }
 
-       
        // 2) AFFICHAGE DU PLANNING DU JOUR
-       
-
        System.out.println("\n=== PLANNING DU " + date + " ===");
 
        for (int c = 0; c < NB_CRENEAUX; c++) {
@@ -965,9 +939,6 @@ public class Etablissement {
            }
        }
    }
-
-
-
     
     /**
     * Affiche tous les rendez-vous appartenant à un client donné.
@@ -987,17 +958,13 @@ public class Etablissement {
     *       trouvés à cause du typage de la saisie.
     */
    public void afficherRendezVousParNumeroClient() {
-
-       
        Scanner sc = new Scanner(System.in);
 
        System.out.println("\n=== Recherche des rendez-vous ===");
 
        int numeroClient = -1;
 
-       
        // 1) Saisie sécurisée du numéro client 
-       
        while (true) {
            try {
                System.out.print("Numéro du client : ");
@@ -1011,9 +978,7 @@ public class Etablissement {
 
        boolean trouve = false;
 
-       
        // 2) Parcours du planning (7 jours × NB_CRENEAUX)
-       
        for (int jour = 0; jour < NB_JOURS; jour++) {
 
            for (int creneau = 0; creneau < NB_CRENEAUX; creneau++) {
@@ -1041,9 +1006,7 @@ public class Etablissement {
            }
        }
 
-       
        // 3) Aucun rendez-vous trouvé
-       
        if (!trouve) {
            System.out.println("Aucun rendez-vous trouvé pour ce client.");
        }

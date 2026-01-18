@@ -4,7 +4,6 @@
 package model.Prestation;
 
 public class PrestationSale extends Prestation {
-       
     //Constructeur
     public PrestationSale(String categorieVehicule) {
         //initialise la catégorie du véhicule en appelant le constructeur 
@@ -30,8 +29,6 @@ public class PrestationSale extends Prestation {
         return prelavage() + lavage()  + sechage()+ prixNettoyageInterieur();// méthode héritée de Prestation
     }
 
-    
-    
     /**
     * Retourne une représentation textuelle d’une prestation
     * pour véhicule sale.
@@ -52,20 +49,10 @@ public class PrestationSale extends Prestation {
     public String versFichier() {
         return categorieVehicule + " : " + (int)nettoyage();
     }
-    
+
     @Override
-    
     public String toString() {
         return "Prestation Sale : categorie Vehicule = " + categorieVehicule +", prix = "+ nettoyage() + " euro";
     }
-    
-//    @Override
-//    public String versFichier() {
-//        return categorieVehicule 
-//                + " : " + nettoyage();
-//    }
-
-
-    
 }
 

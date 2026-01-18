@@ -30,8 +30,8 @@ public class StationLavageMain {
     // Création d'un client sans adresse email
     Client c1 = new Client(1, "Dupont", "0612345678");
 
-	//Création d'un client avec une adresse email
-	Client c2 = new Client(2, "Martin", "0698765432", "martin@mail.com");
+    //Création d'un client avec une adresse email
+    Client c2 = new Client(2, "Martin", "0698765432", "martin@mail.com");
 
     // Affichage des informations des clients
     System.out.println(c1);
@@ -67,25 +67,25 @@ public class StationLavageMain {
     System.out.println("  " + p1b);
     System.out.println("  " + p1c);
 
-	System.out.println("\nPrestations Sale:");
-	System.out.println("  " + p2);
-	System.out.println("  " + p2b);
-	
-	System.out.println("\nPrestations Tres Sale:");
-	System.out.println("  " + p3);
-	System.out.println("  " + p3b);
-	System.out.println("  " + p3c);
-	
-	// =========================
-	// Test de la classe RendezVous
-	// =========================
-	System.out.println("\n--- Test classe RendezVous ---");
-	
-	// Création de plusieurs rendez-vous
-	RendezVous rv1 = new RendezVous(c1, p1);
-	RendezVous rv2 = new RendezVous(c2, p2);
-	RendezVous rv3 = new RendezVous(c1, p3);
-	
+    System.out.println("\nPrestations Sale:");
+    System.out.println("  " + p2);
+    System.out.println("  " + p2b);
+    
+    System.out.println("\nPrestations Tres Sale:");
+    System.out.println("  " + p3);
+    System.out.println("  " + p3b);
+    System.out.println("  " + p3c);
+    
+    // =========================
+    // Test de la classe RendezVous
+    // =========================
+    System.out.println("\n--- Test classe RendezVous ---");
+    
+    // Création de plusieurs rendez-vous
+    RendezVous rv1 = new RendezVous(c1, p1);
+    RendezVous rv2 = new RendezVous(c2, p2);
+    RendezVous rv3 = new RendezVous(c1, p3);
+    
     // Affichage des informations des rendez-vous
     System.out.println("Rendez-vous 1: " + rv1);
     System.out.println("Prix rv1: " + rv1.getPrix() + " €");

@@ -72,8 +72,7 @@ public class PrestationTresSale extends PrestationSale {
         // Retour du prix total de la prestation très sale
         return total;
     }
-    
-    
+
     /**
     * Retourne une représentation textuelle d’une prestation
     * pour véhicule très sale.
@@ -84,7 +83,6 @@ public class PrestationTresSale extends PrestationSale {
     * @return une description textuelle de la prestation pour véhicule très sale
     */
     @Override
-    
     public String toString() {
         return "Prestation Tres Sale [categorie Vehicule ="  + categorieVehicule +
             ", type de salissure = " + libelleTypeSalissure() + ", prix = "+ nettoyage() + " euro]";
@@ -98,7 +96,7 @@ public class PrestationTresSale extends PrestationSale {
     public int getTypeSalissure() {
         return typeSalissure;
     }
-    
+
     /**
      * Retourne les informations de la prestation très sale sous forme de chaîne
      * de caractères pour l'écriture dans un fichier texte.
@@ -110,7 +108,7 @@ public class PrestationTresSale extends PrestationSale {
     public String versFichier() {
         return categorieVehicule + " : " + typeSalissure + " : " + (int)nettoyage();
     }
-    
+
     /**
     * Retourne le libellé correspondant au type de salissure.
     *
@@ -125,13 +123,4 @@ public class PrestationTresSale extends PrestationSale {
             default -> "salissure inconnue";
         };
     }
-    
-//    @Override
-//    public String versFichier() {
-//        return categorieVehicule 
-//                + " : " + typeSalissure 
-//                + " : " + nettoyage();
-//    }
-
-
 }

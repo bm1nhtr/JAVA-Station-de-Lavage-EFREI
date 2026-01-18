@@ -45,7 +45,6 @@ public class Client {
     public String getEmail() {
         return email;
     }
-    
 
     // Setters
     public void setNumeroClient(int numeroClient) {
@@ -55,15 +54,15 @@ public class Client {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    
+
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
     }
- 
+
     /**
      * Compare deux clients pour déterminer l'ordre lexicographique.
      * 
@@ -109,7 +108,6 @@ public class Client {
         return msg;
     }
 
-    
     /**
      * Retourne les informations du client sous forme de chaîne de caractères
      * pour l'écriture dans un fichier texte.

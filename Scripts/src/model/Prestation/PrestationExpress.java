@@ -33,12 +33,11 @@ public class PrestationExpress extends Prestation {
         if (nettoyageInterieur) {
             total += prixNettoyageInterieur();// méthode héritée de Prestation
         }
-        
+
         // Retour du prix total de la prestation express
         return total;
     }
-    
-    
+
     /**
     * Retourne une représentation textuelle d’une prestation express.
     *
@@ -59,7 +58,7 @@ public class PrestationExpress extends Prestation {
     public boolean getNettoyageInterieur() {
         return nettoyageInterieur;
     }
-    
+
     /**
      * Retourne les informations de la prestation express sous forme de chaîne
      * de caractères pour l'écriture dans un fichier texte.
@@ -71,11 +70,9 @@ public class PrestationExpress extends Prestation {
     public String versFichier() {
         return categorieVehicule + " : " + nettoyageInterieur + " : " + (int)nettoyage();
     }
-    
+
     @Override
-    
     public String toString() {
-        
         String interieur;
         if(nettoyageInterieur) {interieur=" Nettoyage interieure";}
         else{interieur=" Pas de nettoyage interieure";}
@@ -83,15 +80,5 @@ public class PrestationExpress extends Prestation {
         return "Prestation Express : categorie Vehicule = " + categorieVehicule + ", "+
                 interieur + ", prix = " + nettoyage() + " euro";
     }
-    
-//    @Override
-//    public String versFichier() {
-//        return categorieVehicule 
-//                + " : " + nettoyageInterieur 
-//                + " : " + nettoyage();
-//    }
-
-
-
 }
 
