@@ -12,6 +12,7 @@ import service.Etablissement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
+import java.io.File;
 
 public class StationLavageMain {
 
@@ -164,24 +165,18 @@ public class StationLavageMain {
     System.out.println("TEST PARTIE 2 - GESTION DES FICHIERS");
     System.out.println("==========================================\n");
    
-    
     //TEST METHODE PLANIFIER()
     System.out.println("\n--- TEST METHODE PLANIFIER() ---");
     E1.planifier();
-
 
     //TEST METHODE AFFICHER PLANNING 
     System.out.println("\n--- TEST METHODE AFFICHER PLANNING ---");
     E1.afficherPlanning();
 
-
-    
     // TEST METHODE AFFICHER CLIENT
     System.out.println("\n--- TEST METHODE AFFICHER CLIENT ---");
     E1.afficherClient();
 
-
-    
     //TEST AFFICHER RDV PAR NUMÉRO CLIENT
     System.out.println("\n--- TEST AFFICHER RDV PAR NUMÉRO CLIENT ---");
     E1.afficherRendezVousParNumeroClient();
@@ -218,13 +213,29 @@ public class StationLavageMain {
     
     // Test versFichierClients() et depuisFichierClients()
     System.out.println("\n--- Test gestion fichiers clients ---");
-    String nomFichierClients = "clients.txt";
+    
+    // Déterminer le chemin du fichier : toujours dans le dossier Scripts/
+    String nomFichierClients;
+    File scriptDir = new File("Scripts");
+    if (scriptDir.exists() && scriptDir.isDirectory()) {
+        // Si on est à la racine du repo, le fichier doit être dans Scripts/
+        nomFichierClients = "Scripts/clients.txt";
+    } else {
+        // Si on est déjà dans Scripts/ (working directory NetBeans), créer directement
+        nomFichierClients = "clients.txt";
+    }
     
     try {
         // Sauvegarder les clients
         System.out.println("Sauvegarde des clients dans " + nomFichierClients + "...");
         E1.versFichierClients(nomFichierClients);
+        
+        // Obtenir le chemin absolu après création du fichier
+        File fichier = new File(nomFichierClients);
+        String cheminAbsolu = fichier.getAbsolutePath();
+        
         System.out.println("✓ Clients sauvegardés avec succès");
+        System.out.println("  Chemin complet du fichier : " + cheminAbsolu);
         
         // Créer un nouvel établissement et charger les clients
         System.out.println("\nCréation d'un nouvel établissement et chargement des clients...");

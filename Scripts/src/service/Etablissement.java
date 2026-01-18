@@ -223,6 +223,7 @@ public class Etablissement {
         int indiceJour = (int)joursEcoules;
         
         // Afficher les heures disponibles pour ce jour
+        System.out.println(); // Ligne vide pour séparer
         System.out.println("Créneaux disponibles pour le " + jour + " :");
         // Tableau pour stocker les indices des créneaux disponibles
         int[] heuresDisponibles = new int[NB_CRENEAUX];
@@ -259,6 +260,8 @@ public class Etablissement {
         Scanner scanner = new Scanner(System.in);
         int choix = 0;
         boolean choixValide = false;
+        
+        System.out.println(); // Ligne vide pour séparer
         
         // Boucle pour demander un choix valide jusqu'à ce que l'utilisateur entre une valeur correcte
         while (!choixValide) {
@@ -315,6 +318,7 @@ public class Etablissement {
         }
         
         // Afficher les jours disponibles pour cette heure
+        System.out.println(); // Ligne vide pour séparer
         System.out.println("Jours disponibles pour " + heure + " :");
         LocalDate aujourdhui = LocalDate.now();
         LocalDate[] joursDisponibles = new LocalDate[NB_JOURS];
@@ -341,6 +345,8 @@ public class Etablissement {
         Scanner scanner = new Scanner(System.in);
         int choix = 0;
         boolean choixValide = false;
+        
+        System.out.println(); // Ligne vide pour séparer
         
         // Boucle pour demander un choix valide jusqu'à ce que l'utilisateur entre une valeur correcte
         while (!choixValide) {
@@ -654,6 +660,8 @@ public class Etablissement {
             System.out.println("Client trouvé : " + client);
         }
 
+        System.out.println(); // Ligne vide pour séparer les sections
+
         // 2) CHOIX DU JOUR (1 à 7)
         LocalDate today = LocalDate.now();
         LocalDate[] jours = new LocalDate[NB_JOURS];
@@ -672,6 +680,7 @@ public class Etablissement {
             try {
                 System.out.print("Votre choix (1-7) : ");
                 choixJour = sc.nextInt();
+                sc.nextLine(); // Consommer le newline restant après nextInt()
 
                 if (choixJour >= 1 && choixJour <= NB_JOURS) break;
 
@@ -684,6 +693,8 @@ public class Etablissement {
         }
         LocalDate jourChoisi = jours[choixJour - 1];
 
+        System.out.println(); // Ligne vide pour séparer les sections
+
         // 3) CRÉNEAU DISPONIBLE
         LocalDateTime dateHeure = rechercher(jourChoisi);
 
@@ -694,6 +705,9 @@ public class Etablissement {
 
         LocalDate date = dateHeure.toLocalDate();
         LocalTime heure = dateHeure.toLocalTime();
+
+        System.out.println(); // Ligne vide pour séparer les sections
+        
 
         // 4) CHOIX DU TYPE DE PRESTATION
         System.out.println("""
@@ -710,8 +724,12 @@ public class Etablissement {
             try {
                 System.out.print("Votre choix : ");
                 choixPrestation = sc.nextInt();
+                sc.nextLine(); // Consommer le newline restant après nextInt()
 
-                if (choixPrestation >= 1 && choixPrestation <= 3) break;
+                if (choixPrestation >= 1 && choixPrestation <= 3) {
+                    System.out.println(); // Ligne vide après choix valide
+                    break;
+                }
 
                 System.out.println(" Choix invalide. Veuillez saisir 1, 2 ou 3.");
 
@@ -720,6 +738,8 @@ public class Etablissement {
                 sc.nextLine();
             }
         }
+
+        System.out.println(); // Ligne vide pour séparer les sections
 
         // Saisie de la catégorie du véhicule
         String categorie = "";
@@ -732,8 +752,10 @@ public class Etablissement {
                 break;
             }
 
-            System.out.println(" Catégorie invalide. Veuillez saisir A, B ou C.\n");
+            System.out.println(" Catégorie invalide. Veuillez saisir A, B ou C.");
         }
+
+        System.out.println(); // Ligne vide pour séparer les sections
 
         RendezVous rdv = null;
 
@@ -741,6 +763,7 @@ public class Etablissement {
         switch (choixPrestation) {
             //  PRESTATION EXPRESS
             case 1 -> {
+                System.out.println(); // Ligne vide pour séparer
                 System.out.print("Nettoyage intérieur (true/false) : ");
 
                 boolean interieur;
@@ -764,6 +787,7 @@ public class Etablissement {
 
             //  PRESTATION TRÈS SALE 
             case 3 -> {
+                System.out.println(); // Ligne vide pour séparer
                 System.out.println("""
                     Type de salissure :
                     1 - Nourriture
@@ -779,6 +803,7 @@ public class Etablissement {
                     try {
                         System.out.print("Votre choix : ");
                         typeSalissure = sc.nextInt();
+                        sc.nextLine(); // Consommer le newline restant après nextInt()
 
                         if (typeSalissure >= 1 && typeSalissure <= 4) break;
 
@@ -792,6 +817,8 @@ public class Etablissement {
                 rdv = ajouter(client, date, heure, categorie, typeSalissure);
             }
         }
+
+        System.out.println(); // Ligne vide pour séparer les sections
 
         // 6) AFFICHAGE FINAL
         if (rdv == null) {
@@ -820,7 +847,7 @@ public class Etablissement {
     public void afficherClient() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("\n=== Recherche de client ===");
+        System.out.println("\n=== Recherche de client ===\n");
 
         String nom = "";
         String telephone = "";
@@ -840,7 +867,8 @@ public class Etablissement {
         }
 
         boolean trouve = false;
-        System.out.println("\n--- Clients trouvés ---");
+        System.out.println(); // Ligne vide pour séparer
+        System.out.println("--- Clients trouvés ---");
 
         for (int i = 0; i < nombre_clients; i++) {
 
@@ -960,7 +988,7 @@ public class Etablissement {
    public void afficherRendezVousParNumeroClient() {
        Scanner sc = new Scanner(System.in);
 
-       System.out.println("\n=== Recherche des rendez-vous ===");
+       System.out.println("\n=== Recherche des rendez-vous ===\n");
 
        int numeroClient = -1;
 
@@ -977,6 +1005,8 @@ public class Etablissement {
        }
 
        boolean trouve = false;
+
+       System.out.println(); // Ligne vide pour séparer
 
        // 2) Parcours du planning (7 jours × NB_CRENEAUX)
        for (int jour = 0; jour < NB_JOURS; jour++) {
