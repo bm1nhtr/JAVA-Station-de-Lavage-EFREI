@@ -3,8 +3,6 @@
 
 package model.Prestation;
 
-import model.Prestation.PrestationSale;
-
 /**
  * Représente une prestation pour véhicule très sale.
  *
@@ -74,8 +72,7 @@ public class PrestationTresSale extends PrestationSale {
         // Retour du prix total de la prestation très sale
         return total;
     }
-    
-    
+
     /**
     * Retourne une représentation textuelle d’une prestation
     * pour véhicule très sale.
@@ -86,12 +83,32 @@ public class PrestationTresSale extends PrestationSale {
     * @return une description textuelle de la prestation pour véhicule très sale
     */
     @Override
-    
     public String toString() {
         return "Prestation Tres Sale [categorie Vehicule ="  + categorieVehicule +
             ", type de salissure = " + libelleTypeSalissure() + ", prix = "+ nettoyage() + " euro]";
     }
     
+    /**
+     * Retourne le type de salissure.
+     * 
+     * @return le type de salissure (1, 2, 3 ou 4)
+     */
+    public int getTypeSalissure() {
+        return typeSalissure;
+    }
+
+    /**
+     * Retourne les informations de la prestation très sale sous forme de chaîne
+     * de caractères pour l'écriture dans un fichier texte.
+     * Format: "catégorie : typeSalissure : prix"
+     * 
+     * @return une chaîne de caractères formatée pour le fichier
+     */
+    @Override
+    public String versFichier() {
+        return categorieVehicule + " : " + typeSalissure + " : " + (int)nettoyage();
+    }
+
     /**
     * Retourne le libellé correspondant au type de salissure.
     *
@@ -106,5 +123,4 @@ public class PrestationTresSale extends PrestationSale {
             default -> "salissure inconnue";
         };
     }
-
 }

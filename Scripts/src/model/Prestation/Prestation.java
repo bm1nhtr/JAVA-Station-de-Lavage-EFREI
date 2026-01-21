@@ -3,10 +3,8 @@
 
 package model.Prestation;
 
-
 public abstract class Prestation {
-    
-// Catégorie du véhicule concerné par la prestation.
+    // Catégorie du véhicule concerné par la prestation.
 // Elle permet d’identifier la taille du véhicule afin d’appliquer
 // les bons tarifs lors du calcul du prix.
 // Valeurs possibles :
@@ -14,9 +12,9 @@ public abstract class Prestation {
 //  - B : berline
 //  - C : monospace ou 4x4
 // directement par les classes filles 
-    protected String categorieVehicule; 
-    
- //Constructeur de la classe Prestation
+    protected String categorieVehicule;
+
+    //Constructeur de la classe Prestation
  //il initialise la catégorie du véhicule pour la prestation
  // Cette information sera utilisée par les méthodes de calcul
  // (lavage, séchage, prélavage) afin d’appliquer les majorations
@@ -26,8 +24,7 @@ public abstract class Prestation {
         this.categorieVehicule = categorieVehicule;
     }
 
-    
-   // Prix du lavage
+    // Prix du lavage
    //Calcule le prix du lavage du véhicule en fonction de sa catégorie
    //Le tarif de base correspond à un véhicule de catégorie A (citadine)
    //Des majorations sont ensuite appliquées selon la catégorie du véhicule :
@@ -42,25 +39,23 @@ public abstract class Prestation {
     protected double lavage() {
         double prix = 20;  // Prix de base du lavage pour un véhicule de catégorie A
         // Application des majorations selon la catégorie du véhicule
-        
+
         if (categorieVehicule.equals("B")) {
             prix *= 1.5; // +50 % pour une berline
         } else if (categorieVehicule.equals("C")) {
             prix *= 1.75; // +75 % pour un monospace ou 4x4
         }
-        
+
         // Retour du prix final du lavage
         return prix;
     }
 
-    
     // Prix du séchage
-    
     //Même principe que pour lavage le tarif de base correspond à un véhicule de catégorie A (citadine)
     //Calcule le prix du séchage du véhicule en fonction de sa catégorie
     //- catégorie B (berline) : majoration de 5 %
     //- catégorie C (monospace / 4x4) : majoration de 10 %
- 
+
     protected double sechage() {
         double prix = 10; // catégorie A
 
@@ -73,14 +68,12 @@ public abstract class Prestation {
         return prix;
     }
 
-    
     // Prix du prélavage
-    
     //Même principe que pour lavage le tarif de base correspond à un véhicule de catégorie A (citadine)
     //calcule le prix du séchage du véhicule en fonction de sa catégorie
     //- catégorie B (berline) : majoration de 50 %
     //- catégorie C (monospace / 4x4) : majoration de 75 %
-    
+
     protected double prelavage() {
         double prix = 5; // catégorie A
 
@@ -121,13 +114,29 @@ public abstract class Prestation {
     
     public abstract double nettoyage();
     
-    
     /**
-    * Retourne une représentation textuelle d’une prestation.
+     * Retourne la catégorie du véhicule.
+     * 
+     * @return la catégorie du véhicule ("A", "B" ou "C")
+     */
+    public String getCategorieVehicule() {
+        return categorieVehicule;
+    }
+
+    /**
+     * Méthode abstraite pour retourner les informations de la prestation
+     * sous forme de chaîne de caractères pour l'écriture dans un fichier texte.
+     * 
+     * @return une chaîne de caractères formatée pour le fichier
+     */
+    public abstract String versFichier();
+
+    /**
+    * Retourne une représentation textuelle d'une prestation.
     *
-    * Cette méthode permet d’afficher de manière lisible
+    * Cette méthode permet d'afficher de manière lisible
     * la catégorie du véhicule associée à la prestation.
-    * Elle est utilisée automatiquement lorsque l’objet
+    * Elle est utilisée automatiquement lorsque l'objet
     * Prestation est affiché (par exemple avec System.out.println).
     *
     * @return une description textuelle de la prestation
@@ -137,4 +146,3 @@ public abstract class Prestation {
         return " [categorieVehicule=" + categorieVehicule + "]";
     }
 }
-

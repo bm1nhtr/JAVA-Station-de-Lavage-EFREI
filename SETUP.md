@@ -12,18 +12,22 @@
 
 ```
 Scripts/
-├── src/
-│   ├── main/ (package: main)
+├── src/                      # Dossier source principal
+│   ├── main/                 # package: main
 │   │   └── StationLavageMain.java
-│   └── model/ (package: model)
-│       ├── Client.java
-│       ├── RendezVous.java
-│       └── Prestation/ (package: model.Prestation)
-│           ├── Prestation.java
-│           ├── PrestationExpress.java
-│           ├── PrestationSale.java
-│           └── PrestationTresSale.java
-└── nbproject/
+│   ├── model/                # package: model
+│   │   ├── Client.java
+│   │   ├── RendezVous.java
+│   │   └── Prestation/       # package: model.Prestation
+│   │       ├── Prestation.java
+│   │       ├── PrestationExpress.java
+│   │       ├── PrestationSale.java
+│   │       └── PrestationTresSale.java
+│   └── service/              # package: service
+│       └── Etablissement.java
+├── nbproject/                # Configuration NetBeans
+├── build.xml                 # Script de build Ant
+└── manifest.mf               # Manifest pour le JAR
 ```
 
 ## Setup Rapide
@@ -41,7 +45,7 @@ Scripts/
 
 3. **Vérifier :**
    - Right-click projet → Properties → Sources
-   - Source Package Folders doit pointer vers `Scripts/src`
+   - Source Package Folders doit pointer vers `src` (relatif au dossier Scripts/)
    - Main class : `main.StationLavageMain`
 
 ## ❌ À NE PAS FAIRE
@@ -50,13 +54,14 @@ Scripts/
 - ❌ Ajouter des packages comme `com.company`
 - ❌ Modifier la structure `src/`
 - ❌ Commiter les fichiers build (`build/`, `dist/`)
-- ❌ **Pousser le code directement depuis NetBeans !** NetBeans ne travaille que dans le dossier `Scripts/`, donc si tu pousses depuis NetBeans, les autres fichiers du repo (README.md, SETUP.md, .gitignore, etc.) seront manquants. Utilise toujours Git depuis le terminal ou depuis la racine du repo !
+- ❌ **Pousser le code directement depuis NetBeans !** NetBeans ne travaille que dans le dossier `Scripts/`, donc si tu pousses depuis NetBeans, les autres fichiers du repo (README.md, SETUP.md, .gitignore, etc.) seront manquants. Utilise Git depuis le terminal ou depuis la racine du repo !
 
 ## ✅ À FAIRE
 
 - ✅ Toujours `git pull` avant de commencer
-- ✅ Commiter uniquement le code source dans `src/`
+- ✅ Commiter uniquement le code source dans `src/` (et les fichiers de config si nécessaire)
 - ✅ Tester avant de push
+- ✅ Utiliser des messages de commit clairs et descriptifs
 
 
 ## Git Workflow
@@ -66,14 +71,14 @@ Scripts/
 ```bash
 # Depuis la RACINE du repo (pas depuis Scripts/)
 # Avant de travailler
-git branch  # vérifier sur quelle branche on est
-git checkout <ta branche>
-git pull origin <branch> # branch = develop
+git branch                    # vérifier sur quelle branche on est
+git checkout develop          # ou <ta branche>
+git pull origin develop       # récupérer les dernières modifications
 
 # Après modifications
 git add .
-git commit -m "messageeeeeeeeee clairrrrrrrrr"
-git push -u origin <ta branche>
+git commit -m "message clair et descriptif"
+git push origin develop       # ou <ta branche>
 ```
 
 ## Packages
@@ -81,5 +86,6 @@ git push -u origin <ta branche>
 - `StationLavageMain.java` : `package main;`
 - `Client.java`, `RendezVous.java` : `package model;`
 - Fichiers dans `Prestation/` : `package model.Prestation;`
+- `Etablissement.java` : `package service;`
 
 **Le nom du package doit correspondre à la structure des dossiers !**
