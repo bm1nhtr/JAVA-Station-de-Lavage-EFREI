@@ -9,6 +9,7 @@ import model.Prestation.PrestationTresSale;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
+import java.time.DayOfWeek;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 import java.io.FileWriter;
@@ -219,6 +220,12 @@ public class Etablissement {
             return null;
         }
         
+        // Vérifier que ce n'est pas un lundi (l'établissement est fermé le lundi)
+        if (jour.getDayOfWeek() == DayOfWeek.MONDAY) {
+            System.out.println("L'établissement est fermé le lundi.");
+            return null;
+        }
+        
         // Convertir le nombre de jours écoulés en indice de jour (0 = aujourd'hui, 1 = demain, etc.)
         int indiceJour = (int)joursEcoules;
         
@@ -326,6 +333,10 @@ public class Etablissement {
         
         for (int jour = 0; jour < NB_JOURS; jour++) {
             LocalDate date = aujourdhui.plusDays(jour);
+            // Exclure les lundis (l'établissement est fermé le lundi)
+            if (date.getDayOfWeek() == DayOfWeek.MONDAY) {
+                continue;
+            }
             if (planning[indiceCreneau][jour] == null) {
                 // Créneau libre
                 joursDisponibles[nbDisponibles] = date;
@@ -384,6 +395,11 @@ public class Etablissement {
         
         // Vérifier que la date est dans les 7 jours suivants
         if (joursEcoules < 0 || joursEcoules >= NB_JOURS) {
+            return null;
+        }
+        
+        // Vérifier que ce n'est pas un lundi (l'établissement est fermé le lundi)
+        if (date.getDayOfWeek() == DayOfWeek.MONDAY) {
             return null;
         }
         
@@ -662,29 +678,40 @@ public class Etablissement {
 
         System.out.println(); // Ligne vide pour séparer les sections
 
-        // 2) CHOIX DU JOUR (1 à 7)
+        // 2) CHOIX DU JOUR (1 à 7, sauf lundi)
         LocalDate today = LocalDate.now();
         LocalDate[] jours = new LocalDate[NB_JOURS];
+        int nbJoursDisponibles = 0;
 
-        System.out.println("\nChoisissez un jour :");
+        System.out.println("\nChoisissez un jour (l'établissement est fermé le lundi) :");
 
-        // Affichage des 7 jours disponibles
+        // Affichage des jours disponibles (exclure les lundis)
         for (int i = 0; i < NB_JOURS; i++) {
-            jours[i] = today.plusDays(i);
-            System.out.println((i + 1) + ". " + jours[i]);
+            LocalDate date = today.plusDays(i);
+            // Exclure les lundis
+            if (date.getDayOfWeek() != DayOfWeek.MONDAY) {
+                jours[nbJoursDisponibles] = date;
+                System.out.println((nbJoursDisponibles + 1) + ". " + date);
+                nbJoursDisponibles++;
+            }
+        }
+        
+        if (nbJoursDisponibles == 0) {
+            System.out.println("Aucun jour disponible (tous les jours sont des lundis).");
+            return;
         }
 
         // Saisie sécurisée
         int choixJour = 0;
         while (true) {
             try {
-                System.out.print("Votre choix (1-7) : ");
+                System.out.print("Votre choix (1-" + nbJoursDisponibles + ") : ");
                 choixJour = sc.nextInt();
                 sc.nextLine(); // Consommer le newline restant après nextInt()
 
-                if (choixJour >= 1 && choixJour <= NB_JOURS) break;
+                if (choixJour >= 1 && choixJour <= nbJoursDisponibles) break;
 
-                System.out.println(" Le jour doit être entre 1 et 7.");
+                System.out.println(" Le jour doit être entre 1 et " + nbJoursDisponibles + ".");
 
             } catch (Exception e) {
                 System.out.println(" Erreur : veuillez saisir un nombre.");
@@ -936,7 +963,12 @@ public class Etablissement {
                long diff = ChronoUnit.DAYS.between(today, date);
 
                if (diff >= 0 && diff < NB_JOURS) {
-                   index = (int) diff;   // Date valide : sortir de la boucle
+                   // Vérifier que ce n'est pas un lundi (l'établissement est fermé le lundi)
+                   if (date.getDayOfWeek() == DayOfWeek.MONDAY) {
+                       System.out.println(" L'établissement est fermé le lundi.\n");
+                   } else {
+                       index = (int) diff;   // Date valide : sortir de la boucle
+                   }
                } else {
                    System.out.println(" La date doit être dans les 7 prochains jours.\n");
                }
